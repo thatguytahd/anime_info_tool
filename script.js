@@ -34,31 +34,19 @@ To Do List:
 //     }
 // }
 
-const updateAnimeResult = (
-    anime = {
-        canonicalTitle:''
-    },
-) => {
-    console.log(anime.canonicalTitle);
-}
-
-const parseData = (response) => {
-    try {
-        console.log(response.text);
-        return JSON.parse(response);
-    } catch(e) {
-        console.log('parseData failed.')
-    }
-}
 
 const getAnimeByName = (name) => {
     let baseURL = 'https://kitsu.io/api/edge/anime/?filter[text]=';
     const xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+
     xhr.onreadystatechange = (r) => {
         if (xhr.status == 200) {
             // const response = xhr.responseText;
             // console.log(response);
-            updateAnimeResult(parseData(r));
+            const anime = xhr.response;
+            console.log(anime);
+            console.log(anime.data.attributes.slug); //not sure why this doesnt work...
         } else {
             console.log(xhr.status);
         }
@@ -66,8 +54,5 @@ const getAnimeByName = (name) => {
     xhr.open('GET', `${baseURL}${name}`);
     xhr.send();
 }
-
-// getAccessToken(authURL, clientID, clientSecret);
-// console.log(accessToken);
 
 getAnimeByName('My Hero Academia');
