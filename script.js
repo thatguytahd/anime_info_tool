@@ -33,7 +33,18 @@ To Do List:
 //         }
 //     }
 // }
+const main = document.getElementById('main');
 
+const updateAnimeResult = (obj) => {
+
+    const anime = obj;
+    const h1 = document.getElementById('output');
+    const poster = document.getElementById('poster');
+
+    poster.src = anime.data[0].attributes.posterImage.medium;
+    h1.textContent = anime.data[0].attributes.canonicalTitle;
+    
+}
 
 const getAnimeByName = (name) => {
     let baseURL = 'https://kitsu.io/api/edge/anime/?filter[text]=';
@@ -47,6 +58,7 @@ const getAnimeByName = (name) => {
             const anime = xhr.response;
             console.log(anime);
             console.log(anime.data[0].attributes.canonicalTitle);
+            updateAnimeResult(anime);
         } else {
             console.log(xhr.status);
         }
