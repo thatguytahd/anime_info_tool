@@ -41,17 +41,19 @@ const getAnimeByName = (name) => {
     xhr.responseType = 'json';
 
     xhr.onreadystatechange = (r) => {
-        if (xhr.status == 200) {
+        if (xhr.readyState == xhr.DONE) {
             // const response = xhr.responseText;
             // console.log(response);
             const anime = xhr.response;
             console.log(anime);
-            console.log(anime.data.attributes.slug); //not sure why this doesnt work...
+            console.log(anime.data[0].attributes.canonicalTitle);
         } else {
             console.log(xhr.status);
         }
     }
     xhr.open('GET', `${baseURL}${name}`);
+    xhr.setRequestHeader('Accept', 'application/vnd.api+json');
+    xhr.setRequestHeader('Content-Type', 'application/vnd.api+json');
     xhr.send();
 }
 
