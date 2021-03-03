@@ -69,4 +69,4 @@ const getAnimeByName = (name) => {
     xhr.send();
 }
 
-getAnimeByName('My Hero Academia');
+getAnimeByName('Gundam Wing');
