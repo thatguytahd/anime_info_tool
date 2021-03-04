@@ -47,6 +47,17 @@ const updateAnimeResult = (obj) => {
     
 }
 
+//function to load all results from the title that was searched
+const loadSearchResults = (obj) => {
+
+    const anime = obj;
+
+    for (let i = 0; i < anime.data.length; i += 1) {
+        console.log(anime.data[i].attributes.canonicalTitle);
+    }
+
+}
+
 const getAnimeByName = (name) => {
     let baseURL = 'https://kitsu.io/api/edge/anime/?filter[text]=';
     const xhr = new XMLHttpRequest();
