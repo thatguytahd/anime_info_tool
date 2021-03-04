@@ -33,7 +33,8 @@ To Do List:
 //         }
 //     }
 // }
-const main = document.getElementById('main');
+const searchInput = document.getElementById('searchInput');
+const searchButton = document.getElementById('searchButton');
 
 const updateAnimeResult = (obj) => {
 
@@ -57,7 +58,7 @@ const getAnimeByName = (name) => {
             // console.log(response);
             const anime = xhr.response;
             console.log(anime);
-            console.log(anime.data[0].attributes.canonicalTitle);
+            // console.log(anime.data[0].attributes.canonicalTitle);
             updateAnimeResult(anime);
         } else {
             console.log(xhr.status);
@@ -69,4 +70,12 @@ const getAnimeByName = (name) => {
     xhr.send();
 }
 
-getAnimeByName('Gundam Wing');
+const getSearchInput = () => {
+    const inputValue = document.getElementById('searchInput').value;
+    getAnimeByName(inputValue);
+    document.getElementById('searchForm').reset();
+}
+
+searchButton.addEventListener("click", getSearchInput);
+
+// getAnimeByName('Gundam Wing');
