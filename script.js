@@ -35,6 +35,7 @@ To Do List:
 // }
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
+const resultsList = document.getElementById();
 
 const updateAnimeResult = (obj) => {
 
@@ -47,7 +48,7 @@ const updateAnimeResult = (obj) => {
     
 }
 
-//function to load all results from the title that was searched
+//function to load all results from the keyword that was searched
 const loadSearchResults = (obj) => {
 
     const anime = obj;
@@ -57,7 +58,7 @@ const loadSearchResults = (obj) => {
     }
 
 }
-
+//function that calls the kitsu api and returns the JSON response
 const getAnimeByName = (name) => {
     let baseURL = 'https://kitsu.io/api/edge/anime/?filter[text]=';
     const xhr = new XMLHttpRequest();
