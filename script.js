@@ -35,7 +35,7 @@ To Do List:
 // }
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
-const resultsList = document.getElementById();
+const resultsList = document.getElementById('resultsList');
 
 const updateAnimeResult = (obj) => {
 
