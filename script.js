@@ -54,11 +54,16 @@ const loadSearchResults = (obj) => {
     const anime = obj;
 
     for (let i = 0; i < anime.data.length; i += 1) {
-        console.log(anime.data[i].attributes.canonicalTitle);
+        let result = document.createElement('LI');
+        let resultNode = document.createTextNode(anime.data[i].attributes.canonicalTitle);
+        result.appendChild(resultNode);
+        resultsList.appendChild(result);
+        // console.log(anime.data[i].attributes.canonicalTitle);
     }
 
 }
-//function that calls the kitsu api and returns the JSON response
+
+//function that calls the kitsu api and returns the JSON response and calls the loadSearchResults() function with the response
 const getAnimeByName = (name) => {
     let baseURL = 'https://kitsu.io/api/edge/anime/?filter[text]=';
     const xhr = new XMLHttpRequest();
@@ -66,12 +71,9 @@ const getAnimeByName = (name) => {
 
     xhr.onreadystatechange = (r) => {
         if (xhr.readyState == xhr.DONE) {
-            // const response = xhr.responseText;
-            // console.log(response);
             const anime = xhr.response;
             console.log(anime);
-            // console.log(anime.data[0].attributes.canonicalTitle);
-            updateAnimeResult(anime);
+            loadSearchResults(anime);
         } else {
             console.log(xhr.status);
         }
@@ -89,5 +91,3 @@ const getSearchInput = () => {
 }
 
 searchButton.addEventListener("click", getSearchInput);
-
-// getAnimeByName('Gundam Wing');
