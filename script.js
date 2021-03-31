@@ -35,17 +35,15 @@ To Do List:
 // }
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
+const searchForm = document.getElementById('searchForm');
 const resultsList = document.getElementById('resultsList');
 
-const updateAnimeResult = (obj) => {
-
-    const anime = obj;
-    const h1 = document.getElementById('output');
-    const poster = document.getElementById('poster');
-
-    poster.src = anime.data[0].attributes.posterImage.medium;
-    h1.textContent = anime.data[0].attributes.canonicalTitle;
-    
+// generic fetchAPI function for simplicity
+const fetchData = (url) =>{
+    return fetch(url)
+        .then(Response.status)
+        .then(Response => Response.json())
+        .catch(error => console.log('There was a problem with your request!', error))
 }
 
 //function to load all results from the keyword that was searched
@@ -53,41 +51,45 @@ const loadSearchResults = (obj) => {
 
     const anime = obj;
 
+    console.log(anime); //logging API response for QA Purposes
+
     for (let i = 0; i < anime.data.length; i += 1) {
         let result = document.createElement('LI');
-        let resultNode = document.createTextNode(anime.data[i].attributes.canonicalTitle);
-        result.appendChild(resultNode);
+        result.className = 'result';
+        result.innerHTML = `
+            <h5>${anime.data[i].attributes.canonicalTitle}<h5>
+            <img src=${anime.data[i].attributes.posterImage.tiny}>
+            <p class="synopsis">${anime.data[i].attributes.synopsis}</p>
+        `;
         resultsList.appendChild(result);
-        // console.log(anime.data[i].attributes.canonicalTitle);
     }
 
 }
 
 //function that calls the kitsu api and returns the JSON response and calls the loadSearchResults() function with the response
 const getAnimeByName = (name) => {
-    let baseURL = 'https://kitsu.io/api/edge/anime/?filter[text]=';
-    const xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
+    let baseURL = `https://kitsu.io/api/edge/anime/?filter[text]=${name}&page[limit]=20`;
 
-    xhr.onreadystatechange = (r) => {
-        if (xhr.readyState == xhr.DONE) {
-            const anime = xhr.response;
-            console.log(anime);
-            loadSearchResults(anime);
-        } else {
-            console.log(xhr.status);
+    const config = {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/vnd.api+json',
+            'Content-Type': 'application/vnd.api+json'
         }
-    }
-    xhr.open('GET', `${baseURL}${name}`);
-    xhr.setRequestHeader('Accept', 'application/vnd.api+json');
-    xhr.setRequestHeader('Content-Type', 'application/vnd.api+json');
-    xhr.send();
+    };
+
+    fetchData(baseURL, config)
+        .then(obj => loadSearchResults(obj));
+    
 }
 
-const getSearchInput = () => {
+const getSearchInput = (e) => {
+    e.preventDefault();
     const inputValue = document.getElementById('searchInput').value;
+    console.log(inputValue);
+    resultsList.innerHTML = ' ';
     getAnimeByName(inputValue);
     document.getElementById('searchForm').reset();
 }
 
-searchButton.addEventListener("click", getSearchInput);
+searchForm.addEventListener('submit', getSearchInput);
