@@ -43,7 +43,7 @@ const fetchData = (url) =>{
     return fetch(url)
         .then(Response.status)
         .then(Response => Response.json())
-        .catch(error => console.log('There was a problem with your request!', error))
+        .catch(error => alert('There was a problem with your request! Please try again.', error))
 }
 
 //function to load all results from the keyword that was searched
@@ -55,14 +55,22 @@ const loadSearchResults = (obj) => {
 
     for (let i = 0; i < anime.data.length; i += 1) {
         let result = document.createElement('section');
-        result.className = 'result';
-        result.innerHTML = `
-            <img src=${anime.data[i].attributes.posterImage.tiny}>
-            <section class="resultInfo">
-                <p><b>Title:</b> ${anime.data[i].attributes.canonicalTitle}</p>
-                <p><b>Synopsis:</b> ${anime.data[i].attributes.synopsis}</p>
-            </section>
-        `;
+        if(anime.meta.count !== 0){
+            result.className = 'result';
+            result.innerHTML = `
+                <img src=${anime.data[i].attributes.posterImage.small}>
+                <section class="resultInfo">
+                    <span><b>Title:</b> ${anime.data[i].attributes.canonicalTitle}</span>
+                    <span><b>Show Type:</b> ${anime.data[i].attributes.showType}</span>
+                    <span><b>Release Date:</b> ${anime.data[i].attributes.startDate}</span>
+                    <span><b>Episode Count:</b> ${anime.data[i].attributes.episodeCount}</span>
+                    <p><b>Synopsis:</b> ${anime.data[i].attributes.synopsis}</p>
+                    <span>Click <a href="https://kitsu.io/anime/${anime.data[i].attributes.slug}" target="_blank">here</a> for more information</span>
+                </section>
+            `;
+        } else if(anime.meta.count === 0) {
+            result.innerHTML = '<h2>Sorry! There were no results for your search</h2>';   
+        }
         resultsList.appendChild(result);
     }
 

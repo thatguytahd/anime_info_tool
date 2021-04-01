@@ -55,12 +55,15 @@ input {
 
 #resultsContainer {
     max-width: 80%;
-    padding-top: 150px;
-    color: whitesmoke;
+    padding-top: 170px;
+    
 }
 
 .result {
     background-color: #7161EF;
+    color: whitesmoke;
+    font-size: 1.25rem;
+
     padding: 15px;
     border-radius: 5px;
     margin-bottom: 25px;
@@ -68,7 +71,7 @@ input {
     display: flex;
     flex-direction: row;
 
-    font-size: 1rem;
+    
 }
 
 .resultInfo {
