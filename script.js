@@ -36,7 +36,7 @@ To Do List:
 const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const searchForm = document.getElementById('searchForm');
-const resultsList = document.getElementById('resultsList');
+const resultsList = document.getElementById('resultsContainer');
 
 // generic fetchAPI function for simplicity
 const fetchData = (url) =>{
@@ -54,12 +54,14 @@ const loadSearchResults = (obj) => {
     console.log(anime); //logging API response for QA Purposes
 
     for (let i = 0; i < anime.data.length; i += 1) {
-        let result = document.createElement('LI');
+        let result = document.createElement('section');
         result.className = 'result';
         result.innerHTML = `
-            <h5>${anime.data[i].attributes.canonicalTitle}<h5>
             <img src=${anime.data[i].attributes.posterImage.tiny}>
-            <p class="synopsis">${anime.data[i].attributes.synopsis}</p>
+            <section class="resultInfo">
+                <p><b>Title:</b> ${anime.data[i].attributes.canonicalTitle}</p>
+                <p><b>Synopsis:</b> ${anime.data[i].attributes.synopsis}</p>
+            </section>
         `;
         resultsList.appendChild(result);
     }

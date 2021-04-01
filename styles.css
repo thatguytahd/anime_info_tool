@@ -7,8 +7,6 @@
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-
     background-color: #E7E247;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -24,13 +22,13 @@ a {
     text-decoration: none;
 }
 
-.mainHeader,
-main {
+.mainHeader {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin: 0;
+    margin-bottom: 25px;
     width: 100%;
+    padding-bottom: 25px;
 }
 
 #mainTitle {
@@ -52,11 +50,36 @@ input {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    justify-content: space-evenly;
 }
 
 #resultsContainer {
     max-width: 80%;
     padding-top: 150px;
-    background-color: #7161EF;
     color: whitesmoke;
+}
+
+.result {
+    background-color: #7161EF;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 25px;
+
+    display: flex;
+    flex-direction: row;
+
+    font-size: 1rem;
+}
+
+.resultInfo {
+    order: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.result img {
+    object-fit: contain;
+    padding-right: 5px;
+    max-width: 100%;
+    height: auto;
 }
