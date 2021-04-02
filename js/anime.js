@@ -9,7 +9,7 @@ const favoritesBtn = document.getElementById('favoritesBtn');
 const fetchData = (url) =>{
     return fetch(url)
         .then(Response.status)
-        .then(Response => Response.json())
+        .then(response => response.json())
         .catch(error => alert('There was a problem with your request! Please try again.', error))
 }
 
@@ -22,7 +22,7 @@ const loadSearchResults = (obj) => {
 
     for (let i = 0; i < anime.data.length; i += 1) {
         let result = document.createElement('section');
-        if(anime.meta.count !== 0){
+        if(anime.data.length !== 0){
             result.className = 'result';
             result.innerHTML = `
                 <img src=${anime.data[i].attributes.posterImage.small}>
@@ -35,14 +35,18 @@ const loadSearchResults = (obj) => {
                     <span>Click <a href="https://kitsu.io/anime/${anime.data[i].attributes.slug}" target="_blank">here</a> for more information.</span>
                 </section>
             `;
-        } else if(anime.meta.count === 0) {
-            result.innerHTML = '<h2>Sorry! There were no results for your search, try again.</h2>';   
+        } else {
+            result.className = 'noResult';
+            result.innerHTML = '<h2>Sorry! There were no results for your search, try again.</h2>'; 
+            resultsList.appendChild(result);  
         }
         resultsList.appendChild(result);
     }
 
 }
 
+// loads my favorite anime list to the resultsContainer div from the.. 
+// local JSON file that we fetch in the getFavoritesList function
 const loadFavorites = (obj) => {
 
     const anime = obj;

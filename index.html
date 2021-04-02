@@ -10,14 +10,14 @@
 </head>
 <body>
     <header id="mainHeader">
-        <h1 id="mainTitle">Tahd's Anime Lookup Tool</h1>
+        <h1 id="mainTitle">Anime Lookup Tool</h1>
         <h3 id="subTitle">Powered by <a href="https://Kitsu.io" target="_blank">Kitsu.io</a></h3>
 
         <div id="searchBar">
-            <button type="button" id="favoritesBtn">Tahd's Favorites</button>
+            <button type="button" id="favoritesBtn" title="See Tahd's Favorite Anime!">Tahd's Favorites</button>
             <form id="searchForm">
-                <input type="text" id="searchInput">
-                <button type="submit" id="searchButton">Search</button>
+                <input type="text" placeholder="Search for an anime" id="searchInput">
+                <button type="submit" id="searchButton" title="Press to search!">Search</button>
             </form>
         </div>
 
@@ -31,6 +31,10 @@
     <div id="resultsContainer">
         <!-- Search results go here. -->
     </div>
+
+    <footer id="mainFooter">
+        <span>&copy;ThatGuyTahd LLC</span>
+    </footer>
     
     <script src="js/anime.js"></script>
     <script src="js/stickyHeader.js"></script>
