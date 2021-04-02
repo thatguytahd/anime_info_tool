@@ -3,6 +3,7 @@ const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const searchForm = document.getElementById('searchForm');
 const resultsList = document.getElementById('resultsContainer');
+const favoritesBtn = document.getElementById('favoritesBtn');
 
 // generic fetchAPI function for simplicity
 const fetchData = (url) =>{
@@ -31,12 +32,38 @@ const loadSearchResults = (obj) => {
                     <span><b>Release Date:</b> ${anime.data[i].attributes.startDate}</span>
                     <span><b>Episode Count:</b> ${anime.data[i].attributes.episodeCount}</span>
                     <p><b>Synopsis:</b> ${anime.data[i].attributes.synopsis}</p>
-                    <span>Click <a href="https://kitsu.io/anime/${anime.data[i].attributes.slug}" target="_blank">here</a> for more information</span>
+                    <span>Click <a href="https://kitsu.io/anime/${anime.data[i].attributes.slug}" target="_blank">here</a> for more information.</span>
                 </section>
             `;
         } else if(anime.meta.count === 0) {
             result.innerHTML = '<h2>Sorry! There were no results for your search, try again.</h2>';   
         }
+        resultsList.appendChild(result);
+    }
+
+}
+
+const loadFavorites = (obj) => {
+
+    const anime = obj;
+
+    console.log(anime); //logging local JSON for QA Purposes
+
+    for (let i = 0; i < anime.tahdsFavorites.length; i += 1) {
+        let result = document.createElement('section');
+            result.className = 'favorite';
+            result.innerHTML = `
+                <img src=${anime.tahdsFavorites[i].image}>
+                <section class="resultInfo">
+                    <span><b>Number:</b> ${anime.tahdsFavorites[i].id}</span>
+                    <span><b>Title:</b> ${anime.tahdsFavorites[i].title}</span>
+                    <span><b>Release Date:</b> ${anime.tahdsFavorites[i].airDate}</span>
+                    <span><b>Episode Count:</b> ${anime.tahdsFavorites[i].episodeCount}</span>
+                    <p><b>Tahd's Thoughts:</b> ${anime.tahdsFavorites[i].tahdsComment}</p>
+                    <span>Click <a href="https://kitsu.io/anime/${anime.tahdsFavorites[i].kitsuSlug}" target="_blank">here</a> for more information.</span>
+                </section>
+            `;
+        
         resultsList.appendChild(result);
     }
 
@@ -59,13 +86,23 @@ const getAnimeByName = (name) => {
     
 }
 
+//function that loads in and parses the local JSON file and sends it to loadFavorites
+const getFavoritesList = () => {
+    let local_data = "./tahdsFavorites.json";
+
+    resultsList.innerHTML = ' ';
+
+    fetchData(local_data)
+        .then(obj => loadFavorites(obj));
+}
+
 const getSearchInput = (e) => {
     e.preventDefault();
     const inputValue = document.getElementById('searchInput').value;
-    console.log(inputValue);
     resultsList.innerHTML = ' ';
     getAnimeByName(inputValue);
     document.getElementById('searchForm').reset();
 }
 
 searchForm.addEventListener('submit', getSearchInput);
+favoritesBtn.addEventListener('click', getFavoritesList);

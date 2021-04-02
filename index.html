@@ -5,19 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tahd's Anime Lookup Tool</title>
 
-    <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" href="styles.css"> 
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css"> 
 </head>
 <body>
-    <header class="mainHeader">
-        <h1 id="mainTitle">Unofficial Kitsu Anime Lookup Tool</h1>
-        <h3 id="subTitle">Powered by <a href="https://Kitsu.io">Kitsu.io</a></h3>
+    <header id="mainHeader">
+        <h1 id="mainTitle">Tahd's Anime Lookup Tool</h1>
+        <h3 id="subTitle">Powered by <a href="https://Kitsu.io" target="_blank">Kitsu.io</a></h3>
 
         <div id="searchBar">
+            <button type="button" id="favoritesBtn">Tahd's Favorites</button>
             <form id="searchForm">
                 <input type="text" id="searchInput">
                 <button type="submit" id="searchButton">Search</button>
             </form>
+        </div>
+
+        <div id="countdownBanner">
+            <span id="countdown">
+                <!-- countdown goes here -->
+            </span>
         </div>
     </header>
 
@@ -25,6 +32,8 @@
         <!-- Search results go here. -->
     </div>
     
-    <script src="script.js"></script>
+    <script src="js/anime.js"></script>
+    <script src="js/stickyHeader.js"></script>
+    <script src="js/countdown.js"></script>
 </body>
 </html>
