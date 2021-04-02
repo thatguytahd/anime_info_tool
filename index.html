@@ -2,29 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tahd's Anime Lookup Tool</title>
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css"> 
 </head>
 <body>
-    <main>
-        <form id="searchForm">
-            <input type="text" id="searchInput">
-            <button type="button" id="searchButton">Search</button>
-        </form>
-        <div id="resultWrapper">
-            <ul id="resultsList">
-                <!-- Search Results Populate Here -->
-            </ul>
+    <header id="mainHeader">
+        <h1 id="mainTitle">Anime Lookup Tool</h1>
+        <h3 id="subTitle">Powered by <a href="https://Kitsu.io" target="_blank">Kitsu.io</a></h3>
+
+        <div id="searchBar">
+            <button type="button" id="favoritesBtn" title="See Tahd's Favorite Anime!">Tahd's Favorites</button>
+            <form id="searchForm">
+                <input type="text" placeholder="Search for an anime" id="searchInput">
+                <button type="submit" id="searchButton" title="Press to search!">Search</button>
+            </form>
         </div>
-        <h1 id = "output"></h1>
-        <img id = "poster">
-        <script src="script.js"></script>
-        <div id="resultsContainer">
-            <ul id="resultsList">
-            <!-- Search results go here. -->
-            </ul>
+
+        <div id="countdownBanner">
+            <span id="countdown">
+                <!-- countdown goes here -->
+            </span>
         </div>
-    </main>
+    </header>
+
+    <div id="resultsContainer">
+        <!-- Search results go here. -->
+    </div>
+
+    <footer id="mainFooter">
+        <span>&copy;ThatGuyTahd LLC</span>
+    </footer>
+    
+    <script src="js/anime.js"></script>
+    <script src="js/stickyHeader.js"></script>
+    <script src="js/countdown.js"></script>
 </body>
 </html>
